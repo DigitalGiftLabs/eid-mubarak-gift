@@ -3,58 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Gift for Annisa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <title>Gift for Annisa</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --p: #2d5a27; --a: #d4af37; --bg: #f8f9f5; }
-        body { background: var(--bg); font-family: 'Quicksand', sans-serif; text-align: center; color: var(--p); display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { background: white; padding: 40px 25px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 380px; width: 100%; border: 1px solid #eee; }
-        .header-font { font-family: 'Pacifico', cursive; color: var(--a); font-size: 2rem; margin-bottom: 20px; }
-        img.main-gif { width: 80%; border-radius: 20px; margin-bottom: 25px; }
-        .btn { background: var(--p); color: white; border: none; padding: 18px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(45,90,39,0.2); }
-        #msg { line-height: 1.6; font-size: 1.1rem; }
+        body { background: #f8f9f5; font-family: sans-serif; text-align: center; padding-top: 50px; color: #2d5a27; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; max-width: 300px; }
+        img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+        .btn { background: #2d5a27; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; }
     </style>
 </head>
 <body>
 
-    <audio id="eidMusic" loop playsinline>
-    <source src="musik.mp3" type="audio/mpeg">
-    <source src="musik.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-</audio>
+    <audio id="lagu" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card">
-        <div class="header-font">Eid Mubarak</div>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" class="main-gif">
-        <h1>To: Annisa ❤️</h1>
-        <p id="msg">I have a special gift for you!</p>
-        
-        <button class="btn" id="playBtn" onclick="jalankanSurprise()">Open My Gift ✨</button>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif">
+        <h2 id="judul">To: Annisa ❤️</h2>
+        <p id="pesan">Klik tombol di bawah ya!</p>
+        <button class="btn" id="tombol" onclick="gas()">Open My Gift ✨</button>
     </div>
 
     <script>
-        function jalankanSurprise() {
-    const audio = document.getElementById("eidMusic");
-    const btn = document.getElementById("playBtn");
+        function gas() {
+            // 1. Kembang api
+            confetti();
 
-    // Efek kembang api
-    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            // 2. Putar Musik (Paling Penting)
+            var audio = document.getElementById("lagu");
+            audio.play();
 
-    // Paksa nyalakan suara dan putar
-    audio.muted = false; 
-    audio.play().then(() => {
-        updateTampilan();
-    }).catch(e => {
-        console.log("Blokir browser masih aktif");
-        document.getElementById('msg').innerHTML = "<b>Klik sekali lagi ya!</b><br>Browser kamu butuh izin manual untuk suaranya 🎶";
-        btn.innerText = "Nyalakan Musik 🎵";
-    });
-}
-
-        function updateTampilan() {
-            document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy your digital gift and the music! 🎶✨";
-            document.getElementById('playBtn').style.display = "none";
+            // 3. Ganti Tulisan
+            document.getElementById("judul").innerHTML = "Mohon Maaf Lahir & Batin!";
+            document.getElementById("pesan").innerHTML = "Enjoy the music! 🎶";
+            document.getElementById("tombol").style.display = "none";
         }
     </script>
 </body>
