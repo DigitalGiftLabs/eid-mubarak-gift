@@ -18,9 +18,11 @@
 </head>
 <body>
 
-    <audio id="eidMusic" loop>
-        <source src="musik.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="eidMusic" loop playsinline>
+    <source src="musik.mp3" type="audio/mpeg">
+    <source src="musik.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
 
     <div class="card">
         <div class="header-font">Eid Mubarak</div>
@@ -33,28 +35,22 @@
 
     <script>
         function jalankanSurprise() {
-            const audio = document.getElementById("eidMusic");
-            const btn = document.getElementById("playBtn");
+    const audio = document.getElementById("eidMusic");
+    const btn = document.getElementById("playBtn");
 
-            // 1. Langsung tembak kembang api (Tanpa nunggu musik)
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#2d5a27', '#d4af37']
-            });
+    // Efek kembang api
+    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
 
-            // 2. Berusaha putar musik
-            audio.play().then(() => {
-                // Musik berhasil jalan
-                updateTampilan();
-            }).catch(e => {
-                // Musik diblokir browser, butuh satu klik lagi
-                console.log("Audio blocked by browser.");
-                document.getElementById('msg').innerHTML = "<b>Satu langkah lagi!</b><br>Klik tombol di bawah untuk menyalakan musik 🎶";
-                btn.innerText = "Play Music 🎵";
-            });
-        }
+    // Paksa nyalakan suara dan putar
+    audio.muted = false; 
+    audio.play().then(() => {
+        updateTampilan();
+    }).catch(e => {
+        console.log("Blokir browser masih aktif");
+        document.getElementById('msg').innerHTML = "<b>Klik sekali lagi ya!</b><br>Browser kamu butuh izin manual untuk suaranya 🎶";
+        btn.innerText = "Nyalakan Musik 🎵";
+    });
+}
 
         function updateTampilan() {
             document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy your digital gift and the music! 🎶✨";
