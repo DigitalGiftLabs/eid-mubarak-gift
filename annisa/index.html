@@ -3,55 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Gift for Annisa</title>
+    <title>A Special Gift for Annisa</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --p: #2d5a27; --a: #d4af37; }
-        body { background: #f8f9f5; font-family: 'Quicksand', sans-serif; text-align: center; color: var(--p); display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 350px; width: 90%; }
-        img { width: 80%; border-radius: 20px; margin-bottom: 15px; }
-        .btn { background: var(--p); color: white; border: none; padding: 15px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-size: 1rem; }
-        #musicStatus { font-size: 0.7rem; color: #999; margin-top: 10px; display: none; }
+        :root { --p: #2d5a27; --a: #d4af37; --bg: #f8f9f5; }
+        body { background: var(--bg); font-family: 'Quicksand', sans-serif; text-align: center; color: var(--p); display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { background: white; padding: 40px 25px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 380px; width: 100%; border: 1px solid #eee; }
+        .header-font { font-family: 'Pacifico', cursive; color: var(--a); font-size: 2rem; margin-bottom: 20px; }
+        img.main-gif { width: 80%; border-radius: 20px; margin-bottom: 25px; }
+        .btn { background: var(--p); color: white; border: none; padding: 18px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(45,90,39,0.2); }
+        #msg { line-height: 1.6; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
     <audio id="eidMusic" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/03/23/audio_73e7261899.mp3" type="audio/mpeg">
+        <source src="musik.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card">
-        <div style="font-family:'Pacifico'; color:var(--a); font-size:1.8rem;">Eid Mubarak</div>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif">
-        <h2 id="targetName">To: Annisa ❤️</h2>
+        <div class="header-font">Eid Mubarak</div>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" class="main-gif">
+        <h1>To: Annisa ❤️</h1>
         <p id="msg">I have a special gift for you!</p>
-        <button class="btn" id="playBtn" onclick="mainkan()">Open My Gift ✨</button>
-        <div id="musicStatus">Tap again if music doesn't play</div>
+        
+        <button class="btn" id="playBtn" onclick="jalankanSurprise()">Open My Gift ✨</button>
     </div>
 
     <script>
-        function mainkan() {
+        function jalankanSurprise() {
             const audio = document.getElementById("eidMusic");
-            
-            // 1. Kembang Api
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            const btn = document.getElementById("playBtn");
 
-            // 2. Mainkan Musik
+            // 1. Langsung tembak kembang api (Tanpa nunggu musik)
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#2d5a27', '#d4af37']
+            });
+
+            // 2. Berusaha putar musik
             audio.play().then(() => {
-                lanjutKeTampilanBaru();
+                // Musik berhasil jalan
+                updateTampilan();
             }).catch(e => {
-                // Jika browser blokir, kita minta user tap sekali lagi
-                document.getElementById('msg').innerHTML = "<b>Satu langkah lagi!</b><br>Klik tombol di bawah untuk dengerin musiknya 🎶";
-                document.getElementById('playBtn').innerText = "Play Music 🎵";
-                document.getElementById('musicStatus').style.display = "block";
+                // Musik diblokir browser, butuh satu klik lagi
+                console.log("Audio blocked by browser.");
+                document.getElementById('msg').innerHTML = "<b>Satu langkah lagi!</b><br>Klik tombol di bawah untuk menyalakan musik 🎶";
+                btn.innerText = "Play Music 🎵";
             });
         }
 
-        function lanjutKeTampilanBaru() {
-            document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy your day! 🎶";
+        function updateTampilan() {
+            document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy your digital gift and the music! 🎶✨";
             document.getElementById('playBtn').style.display = "none";
-            document.getElementById('musicStatus').style.display = "none";
         }
     </script>
 </body>
