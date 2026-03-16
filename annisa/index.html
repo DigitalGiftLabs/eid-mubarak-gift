@@ -21,9 +21,9 @@
 </head>
 <body>
 
-    <audio id="eidMusic" loop>
-        <source src="https://www.chosic.com/wp-content/uploads/2021/05/Stardust.mp3" type="audio/mpeg">
-    </audio>
+<audio id="eidMusic" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
     <div class="card">
         <div class="header-font">Eid Mubarak</div>
@@ -37,17 +37,21 @@
     </div>
 
     <script>
-        function initExperience() {
-            // 1. Play Music
-            var audio = document.getElementById("eidMusic");
-            audio.play();
+function initExperience() {
+    var audio = document.getElementById("eidMusic");
+    audio.volume = 1.0; // Pastikan volume full 100%
+    
+    // Teknik pancingan: Play dulu baru alert
+    audio.play().then(() => {
+        console.log("Playback started successfully");
+    }).catch(error => {
+        console.log("Playback failed: ", error);
+    });
 
-            // 2. Confetti Effect
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2d5a27', '#d4af37'] });
-
-            // 3. Change Text & Hide Button
-            document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy the music and this little page made just for you!";
-            document.getElementById('playBtn').style.display = "none";
+    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2d5a27', '#d4af37'] });
+    document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy the music and this little page made just for you!";
+    document.getElementById('playBtn').style.display = "none";
+}
             
             alert("Music is now playing! Enjoy ❤️");
         }
