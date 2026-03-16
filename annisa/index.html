@@ -32,28 +32,37 @@
     </div>
 
     <script>
-        function forcePlay() {
-            var audio = document.getElementById("eidMusic");
-            
-            // Set volume ke 100%
-            audio.volume = 1.0;
-            
-            // Coba putar musik
-            var playPromise = audio.play();
+    var isExperienceStarted = false;
 
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Musik berhasil jalan!
-                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2d5a27', '#d4af37'] });
-                    document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Hope you like the music! 🎶";
-                    document.getElementById('playBtn').style.display = "none";
-                }).catch(error => {
-                    // Jika gagal, tampilkan pesan error di layar biar kita tau masalahnya
-                    alert("Klik OK sekali lagi untuk mengaktifkan musik!");
-                    audio.play();
-                });
-            }
+    function forcePlay() {
+        if (isExperienceStarted) return; // Mencegah klik ganda yang bikin error
+        isExperienceStarted = true;
+
+        var audio = document.getElementById("eidMusic");
+        audio.volume = 1.0;
+
+        // 1. EFEK VISUAL DULUAN (Biar nggak kerasa lag)
+        confetti({ 
+            particleCount: 150, 
+            spread: 70, 
+            origin: { y: 0.6 }, 
+            colors: ['#2d5a27', '#d4af37'] 
+        });
+
+        document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy the music and this little page made just for you!";
+        document.getElementById('playBtn').style.display = "none";
+
+        // 2. MUSIK JALAN DI BELAKANG (Biar nggak nahan animasi)
+        var playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Autoplay dicegah, tapi animasi tetap jalan!");
+                // Kalau musik gagal, kita munculkan tombol kecil "Play Music" 
+                // tapi biasanya dengan klik pertama tadi sudah cukup.
+            });
         }
-    </script>
+    }
+</script>
 </body>
 </html>
