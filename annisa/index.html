@@ -3,57 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Gift for You | DigitalGiftLabs</title>
+    <title>A Gift for Annisa | DigitalGiftLabs</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #2d5a27; --accent: #d4af37; --bg: #f8f9f5; }
         body { background-color: var(--bg); font-family: 'Quicksand', sans-serif; text-align: center; color: var(--primary); margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-        .card { background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 400px; width: 100%; position: relative; overflow: hidden; }
+        .card { background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 400px; width: 100%; position: relative; }
         .header-font { font-family: 'Pacifico', cursive; color: var(--accent); font-size: 2rem; margin-bottom: 15px; }
-        img.main-gif { width: 85%; border-radius: 20px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
-        h1 { font-size: 1.4rem; margin-bottom: 10px; }
-        p { font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 25px; }
-        .btn { background-color: var(--primary); color: white; border: none; padding: 16px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-family: 'Quicksand', sans-serif; transition: 0.3s; margin-top: 10px;}
-        .btn:hover { transform: scale(1.02); }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        img.main-gif { width: 85%; border-radius: 20px; margin-bottom: 20px; }
+        .btn { background-color: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
-<audio id="eidMusic" loop preload="auto">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+    <audio id="eidMusic" preload="auto" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card">
         <div class="header-font">Eid Mubarak</div>
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" class="main-gif">
         <h1>To: Annisa ❤️</h1>
-        <p id="msg">I have a little surprise for you. Click the button below to open it!</p>
+        <p id="msg">I have a surprise with music! Click below:</p>
         
-        <button class="btn" id="playBtn" onclick="initExperience()">Open My Gift ✨</button>
-        
+        <button class="btn" id="playBtn" onclick="forcePlay()">Open My Gift ✨</button>
         <p style="font-size: 0.6rem; margin-top: 30px; color: #ccc;">Exclusive Digital Gift by DigitalGiftLabs</p>
     </div>
 
     <script>
-function initExperience() {
-    var audio = document.getElementById("eidMusic");
-    audio.volume = 1.0; // Pastikan volume full 100%
-    
-    // Teknik pancingan: Play dulu baru alert
-    audio.play().then(() => {
-        console.log("Playback started successfully");
-    }).catch(error => {
-        console.log("Playback failed: ", error);
-    });
-
-    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2d5a27', '#d4af37'] });
-    document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy the music and this little page made just for you!";
-    document.getElementById('playBtn').style.display = "none";
-}
+        function forcePlay() {
+            var audio = document.getElementById("eidMusic");
             
-            alert("Music is now playing! Enjoy ❤️");
+            // Set volume ke 100%
+            audio.volume = 1.0;
+            
+            // Coba putar musik
+            var playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Musik berhasil jalan!
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2d5a27', '#d4af37'] });
+                    document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Hope you like the music! 🎶";
+                    document.getElementById('playBtn').style.display = "none";
+                }).catch(error => {
+                    // Jika gagal, tampilkan pesan error di layar biar kita tau masalahnya
+                    alert("Klik OK sekali lagi untuk mengaktifkan musik!");
+                    audio.play();
+                });
+            }
         }
     </script>
 </body>
