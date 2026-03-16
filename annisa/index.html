@@ -10,39 +10,50 @@
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; max-width: 320px; width: 100%; }
         img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
         .btn { background: #2d5a27; color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1rem; }
+        #status { font-size: 0.6rem; color: #ccc; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <audio id="lagu" loop>
-        <source src="https://cdn.pixabay.com/audio/2024/02/14/audio_1416e994bc.mp3" type="audio/mpeg">
+    <audio id="lagu" preload="auto" loop>
+        <source src="musik.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif">
         <h2 id="judul">To: Annisa ❤️</h2>
-        <p id="pesan">Klik tombol di bawah ya!</p>
+        <p id="pesan">Tunggu sebentar sampai musik siap, lalu klik!</p>
         <button class="btn" id="tombol" onclick="gas()">Open My Gift ✨</button>
+        <p id="status">Audio status: Loading...</p>
     </div>
 
     <script>
+        var audio = document.getElementById("lagu");
+        var statusP = document.getElementById("status");
+
+        // Cek apakah audio sudah beneran ter-load
+        audio.oncanplaythrough = function() {
+            statusP.innerText = "Audio Ready! 🎶";
+            statusP.style.color = "#2d5a27";
+        };
+
         function gas() {
-            // 1. Ganti tulisan dulu (Biar user tau tombol sudah bekerja)
+            // 1. Ganti tampilan (Instan)
             document.getElementById("judul").innerHTML = "Mohon Maaf Lahir & Batin!";
             document.getElementById("pesan").innerHTML = "Enjoy the music! 🎶✨";
             document.getElementById("tombol").style.display = "none";
+            statusP.style.display = "none";
 
             // 2. Kembang api
-            confetti();
+            confetti({ particleCount: 150, spread: 70 });
 
-            // 3. Putar Musik dengan "Try-Catch" agar tidak merusak kodingan lain
-            var audio = document.getElementById("lagu");
-            audio.play().catch(function(error) {
-                console.log("Musik tertahan browser, klik layar lagi ya!");
-                // Kalau gagal, kita minta user klik layar sekali lagi
-                alert("Klik OK untuk memutar musiknya!");
+            // 3. Paksa Audio Play
+            audio.play();
+            
+            // Jurus bayangan: kalau tetap gak bunyi, kita paksa lewat interaksi global
+            window.onclick = function() {
                 audio.play();
-            });
+            };
         }
     </script>
 </body>
