@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Gift for You | DigitalGiftLabs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --primary: #2d5a27; --accent: #d4af37; --bg: #f8f9f5; }
+        body { background-color: var(--bg); font-family: 'Quicksand', sans-serif; text-align: center; color: var(--primary); margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .card { background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 400px; width: 100%; position: relative; overflow: hidden; }
+        .header-font { font-family: 'Pacifico', cursive; color: var(--accent); font-size: 2rem; margin-bottom: 15px; }
+        img.main-gif { width: 85%; border-radius: 20px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
+        h1 { font-size: 1.4rem; margin-bottom: 10px; }
+        p { font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 25px; }
+        .btn { background-color: var(--primary); color: white; border: none; padding: 16px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-family: 'Quicksand', sans-serif; transition: 0.3s; margin-top: 10px;}
+        .btn:hover { transform: scale(1.02); }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body>
+
+    <audio id="eidMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <div class="header-font">Eid Mubarak</div>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" class="main-gif">
+        <h1>To: Annisa ❤️</h1>
+        <p id="msg">I have a little surprise for you. Click the button below to open it!</p>
+        
+        <button class="btn" id="playBtn" onclick="initExperience()">Open My Gift ✨</button>
+        
+        <p style="font-size: 0.6rem; margin-top: 30px; color: #ccc;">Exclusive Digital Gift by DigitalGiftLabs</p>
+    </div>
+
+    <script>
+        function initExperience() {
+            // 1. Play Music
+            var audio = document.getElementById("eidMusic");
+            audio.play();
+
+            // 2. Confetti Effect
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2d5a27', '#d4af37'] });
+
+            // 3. Change Text & Hide Button
+            document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy the music and this little page made just for you!";
+            document.getElementById('playBtn').style.display = "none";
+            
+            alert("Music is now playing! Enjoy ❤️");
+        }
+    </script>
+</body>
+</html>
