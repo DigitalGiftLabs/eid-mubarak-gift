@@ -3,72 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Gift for Annisa | DigitalGiftLabs</title>
+    <title>A Gift for Annisa</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #2d5a27; --accent: #d4af37; --bg: #f8f9f5; }
         body { background-color: var(--bg); font-family: 'Quicksand', sans-serif; text-align: center; color: var(--primary); margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-        .card { background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 400px; width: 100%; position: relative; }
+        .card { background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 400px; width: 100%; }
         .header-font { font-family: 'Pacifico', cursive; color: var(--accent); font-size: 2rem; margin-bottom: 15px; }
         img.main-gif { width: 85%; border-radius: 20px; margin-bottom: 20px; }
-        .btn { background-color: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-size: 1.1rem; transition: 0.3s; }
-        #player { display: none; } /* Sembunyikan player YouTube */
+        .btn { background-color: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; cursor: pointer; font-weight: 600; width: 100%; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
-    <div id="player"></div>
+    <audio id="eidMusic" preload="auto" loop>
+        <source src="https://www.chosic.com/wp-content/uploads/2021/07/The-Desert.mp3" type="audio/mpeg">
+    </audio>
 
-    <div class="card">
+    <div class="card" id="mainCard">
         <div class="header-font">Eid Mubarak</div>
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" class="main-gif">
         <h1>To: Annisa ❤️</h1>
-        <p id="msg">I have a special gift with music for you!</p>
-        
-        <button class="btn" id="playBtn" onclick="startGift()">Open My Gift ✨</button>
-        <p style="font-size: 0.6rem; margin-top: 30px; color: #ccc;">Exclusive Digital Gift by DigitalGiftLabs</p>
+        <p id="msg">I have a special gift for you!</p>
+        <button class="btn" id="playBtn" onclick="mulaiSurprise()">Open My Gift ✨</button>
     </div>
 
     <script>
-        // 1. Memuat API YouTube
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        function mulaiSurprise() {
+            console.log("Tombol diklik!"); // Cek di console desktop
+            
+            // 1. Jalankan Kembang Api Dulu (Wajib!)
+            try {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            } catch(e) { console.log("Confetti error"); }
 
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'f9fS06y-P0A', // ID Video Youtube (Lagu Lebaran Instrument)
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            console.log("Music is ready!");
-        }
-
-        function startGift() {
-            // Putar Musik Youtube
-            if (player) {
-                player.playVideo();
-            }
-
-            // Kembang Api
-            confetti({ 
-                particleCount: 150, 
-                spread: 70, 
-                origin: { y: 0.6 }, 
-                colors: ['#2d5a27', '#d4af37'] 
+            // 2. Putar Musik
+            var audio = document.getElementById("eidMusic");
+            audio.play().catch(function(error) {
+                console.log("Musik diblokir browser, tapi kado tetap lanjut!");
             });
 
-            // Ubah Tampilan
-            document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy the special music for you! 🎶";
+            // 3. Ubah Pesan
+            document.getElementById('msg').innerHTML = "<b>Mohon Maaf Lahir & Batin.</b><br>Enjoy your day! 🎶";
             document.getElementById('playBtn').style.display = "none";
         }
     </script>
