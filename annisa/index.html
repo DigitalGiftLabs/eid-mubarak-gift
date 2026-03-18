@@ -3,58 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift for Annisa</title>
+    <title>A Gift for Muteee 🤍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        body { background: #f8f9f5; font-family: sans-serif; text-align: center; padding: 50px 20px; color: #2d5a27; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; max-width: 320px; width: 100%; }
-        img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
-        .btn { background: #2d5a27; color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1rem; }
-        #status { font-size: 0.6rem; color: #ccc; margin-top: 10px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            background: #0a192f; /* Deep Navy Blue */
+            font-family: 'Quicksand', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+
+        /* Dekorasi Langit Malam */
+        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)), radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)), radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)); background-repeat: repeat; background-size: 200px 200px; opacity: 0.4; }
+        .moon { position: absolute; top: 30px; right: 30px; width: 50px; height: 50px; background: #FFD700; border-radius: 50%; box-shadow: 0 0 25px #FFD700; opacity: 0.8; }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            padding: 30px 20px;
+            border-radius: 30px;
+            border: 2px solid #d4af37; /* Gold Border */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        video.display-vid { 
+            width: 100%; 
+            border-radius: 20px; 
+            border: 2px solid #d4af37; 
+            margin-bottom: 20px;
+            object-fit: cover;
+            background: #000;
+        }
+
+        h1 { font-family: 'Pacifico', cursive; color: #d4af37; font-size: 1.8rem; margin-bottom: 10px; }
+        p#msg { font-size: 1rem; line-height: 1.5; margin-bottom: 20px; min-height: 3em; }
+
+        /* Tombol Utama */
+        .btn-gold { background: #d4af37; color: #0a192f; border: none; padding: 15px; border-radius: 15px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
+        .btn-gold:active { transform: scale(0.95); }
+        
+        /* Tombol Pilihan Jawaban */
+        .btn-group { display: none; flex-direction: column; gap: 12px; }
+        .btn-ans { background: white; color: #0a192f; border: none; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 0.9rem; width: 100%; transition: 0.3s; }
+        .btn-ans:hover { background: #f0f0f0; }
+
+        #status { font-size: 0.7rem; color: #d4af37; margin-top: 15px; opacity: 0.7; }
     </style>
 </head>
 <body>
 
-    <audio id="lagu" preload="auto" loop>
-    <source src="testmusic.mp3" type="audio/mpeg">
-</audio>
+    <div class="stars"></div>
+    <div class="moon"></div>
+
+    <audio id="lagu" loop>
+        <source src="eid1.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif">
-        <h2 id="judul">To: Annisa ❤️</h2>
-        <p id="pesan">Tunggu sebentar sampai musik siap, lalu klik!</p>
-        <button class="btn" id="tombol" onclick="gas()">Open My Gift ✨</button>
-        <p id="status">Audio status: Loading...</p>
+        <video id="eidVideo" class="display-vid" autoplay muted loop playsinline>
+            <source src="eidcat1.mp4" type="video/mp4">
+        </video>
+        
+        <h1 id="judul">To: Muteee 🤍</h1>
+        <p id="msg">Tunggu sebentar ya, kado lagi disiapin...</p>
+        
+        <button class="btn-gold" id="btnMain" onclick="mulai()">Open My Gift ✨</button>
+
+        <div class="btn-group" id="jawaban">
+            <button class="btn-ans" onclick="jawab('maaf')">maaf diterima</button>
+            <button class="btn-ans" onclick="jawab('thr')">bagi THR dulu dong</button>
+            <button class="btn-ans" onclick="jawab('kangen')">aku nggak kangen</button>
+        </div>
+
+        <p id="status">Memuat kado... 🌙</p>
     </div>
 
     <script>
         var audio = document.getElementById("lagu");
         var statusP = document.getElementById("status");
+        var video = document.getElementById("eidVideo");
 
-        // Cek apakah audio sudah beneran ter-load
+        // Deteksi audio siap
         audio.oncanplaythrough = function() {
-            statusP.innerText = "Audio Ready! 🎶";
-            statusP.style.color = "#2d5a27";
+            statusP.innerText = "Kado sudah siap dibuka! ✨";
         };
 
-        function gas() {
-            // 1. Ganti tampilan (Instan)
-            document.getElementById("judul").innerHTML = "Mohon Maaf Lahir & Batin!";
-            document.getElementById("pesan").innerHTML = "Enjoy the music! 🎶✨";
-            document.getElementById("tombol").style.display = "none";
-            statusP.style.display = "none";
-
-            // 2. Kembang api
-            confetti({ particleCount: 150, spread: 70 });
-
-            // 3. Paksa Audio Play
+        function mulai() {
+            // Mainkan musik
             audio.play();
             
-            // Jurus bayangan: kalau tetap gak bunyi, kita paksa lewat interaksi global
-            window.onclick = function() {
-                audio.play();
-            };
+            // Efek kembang api awal
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+
+            // Ganti teks
+            document.getElementById("judul").innerHTML = "Mohon Maaf Lahir & Batin";
+            document.getElementById("msg").innerHTML = "hadiah kecil dari aku yang kangen.";
+            
+            // Sembunyikan tombol buka, munculkan pilihan
+            document.getElementById("btnMain").style.display = "none";
+            document.getElementById("status").style.display = "none";
+            document.getElementById("jawaban").style.display = "flex";
         }
+
+        function jawab(tipe) {
+            let p = document.getElementById("msg");
+            let j = document.getElementById("judul");
+            let v = document.getElementById("eidVideo");
+
+            if(tipe === 'maaf') {
+                j.innerText = "Alhamdulillaaahhh 🤗";
+                p.innerText = "Maaci ya udah dimaafin! Kamu emang yang terbaik.";
+                confetti();
+                // Video tetep kucing (eidcat1.mp4)
+            } 
+            else if(tipe === 'thr') {
+                j.innerText = "Traktir Mie Ayam! 🍜";
+                p.innerText = "Ayok aku traktir mie ayam sepuasnya sampai kenyang!";
+                // Ganti ke GIF/Video makan (Contoh pakai link luar dulu)
+                v.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif";
+            } 
+            else if(tipe === 'kangen') {
+                j.innerText = "Yaudah iya.. 🥺";
+                p.innerText = "Meskipun kamu nggak kangen, aku tetep kangen kok!";
+                // Ganti ke GIF sedih
+                v.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3B4eXo5NmcyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/OPU6wUKARAOztu6S2K/giphy.gif";
+            }
+            
+            v.load(); // Refresh video
+            v.play();
+        }
+
+        // Antisipasi kebijakan browser
+        window.onclick = function() { 
+            if (audio.paused) audio.play(); 
+        };
     </script>
 </body>
 </html>
