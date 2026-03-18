@@ -124,7 +124,7 @@
         <div id="groupTombol" class="btn-group">
             <button class="btn-ans" onclick="jawab('maaf')">maaf diterima</button>
             <button class="btn-ans" onclick="jawab('thr')">bagi THR dulu dong</button>
-            <button class="btn-ans" onclick="jawab('kangen')">aku nggak kangen</button>
+            <button class="btn-ans" onclick="jawab('kangen')">nggak kangen tuh, pwih! 💦</button>
         </div>
 
         <button id="btnBack" onclick="resetPage()">← Kembali ke Awal</button>
@@ -150,18 +150,18 @@
 
             if(tipe === 'maaf') {
                 j.innerText = "Alhamdulillah 🤗";
-                p.innerHTML = "Maaci ya udah dimaafin!<br>Kamu emang yang terbaik.";
+                p.innerHTML = "Mks tsay!<br>u emang yang terbaik.";
                 confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
                 img.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWp0dWkyZGhob2F4dDlzd2J4MnYwNnF4aTdyYnF5YjlibnptcGQwOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/96suQaNpBRyE/giphy.gif";
             } 
             else if(tipe === 'thr') {
                 j.innerText = "Mie ayam, mau? 🍜";
-                p.innerHTML = "Ayok aku traktir mie ayam sepuasnya<br>sampai kenyang!";
+                p.innerHTML = "Ayok w traktir mie ayam sepuasnya<br>sampe perut u mbledug!";
                 img.src = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGVuZW1wejY5YzFlZ3F6ZHFrbjYxdTI4ODg1aGNha3U1YmFidHZ2NSZlcD12MV9naWZzX3NlYXJjaCZjdD1z/A5iIn3QcbTYN7ylM3e/giphy.gif";
             } 
             else if(tipe === 'kangen') {
                 j.innerText = "yaudah iya.. 🥺";
-                p.innerHTML = "Meskipun kamu nggak kangen,<br>aku tetep kangen kok!";
+                p.innerHTML = "Meskipun u nggak kangen,<br>w tetep kangen kok!";
                 img.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmpuc2ZyZjJhNDZpMzh1eWhlY25kdG50YWV5bzJjZzVkeWh6NnNsdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4uVyQiFGLicuI/giphy.gif";
             }
         }
