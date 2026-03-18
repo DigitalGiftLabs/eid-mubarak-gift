@@ -76,10 +76,21 @@
             padding: 12px; 
             border-radius: 12px; 
             cursor: pointer; 
+            font-family: 'Quicksand', sans-serif;
             font-weight: bold; 
             font-size: 0.9rem; 
             text-transform: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
             animation: goldPulse 2s infinite;
+        }
+
+        /* EFEK PAS DIKLIK (Tambahkan di bawahnya biar kelihatan pas record) */
+        .btn-ans:active { 
+            transform: scale(0.9); /* Tombol mengecil pas ditekan */
+            background: #d4af37 !important; /* Warna berubah jadi emas */
+            color: white !important;
         }
 
         /* Tombol Back - Aku bikin kontras biar kelihatan */
