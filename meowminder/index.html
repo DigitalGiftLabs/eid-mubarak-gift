@@ -15,30 +15,37 @@
         }
         .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)), radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)), radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)); background-repeat: repeat; background-size: 200px 200px; opacity: 0.4; }
         .moon { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: #FFD700; border-radius: 50%; box-shadow: 0 0 20px #FFD700; }
+        
         .card { 
             background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px);
             padding: 20px; border-radius: 25px; border: 2px solid #d4af37;
-            width: 100%; max-width: 330px; text-align: center; z-index: 10;
+            width: 100%; max-width: 340px; text-align: center; z-index: 10;
         }
+
+        /* MEDIA SKALA 1:1 */
         .display-media { 
-            width: 100%; height: 180px; border-radius: 15px; border: 2px solid #d4af37; 
+            width: 100%; 
+            aspect-ratio: 1 / 1; /* SKALA 1:1 KOTAK PRESISI */
+            border-radius: 15px; border: 2px solid #d4af37; 
             margin-bottom: 15px; object-fit: cover; background: #000; display: none;
         }
-        h1 { font-family: 'Patrick Hand SC', cursive; color: #d4af37; font-size: 2.2rem; margin-bottom: 10px; text-transform: none !important; }
-        p#msg { font-size: 0.95rem; line-height: 1.4; margin-bottom: 20px; min-height: 3em; text-transform: none !important; }
+
+        h1 { font-family: 'Patrick Hand SC', cursive; color: #d4af37; font-size: 2rem; margin-bottom: 10px; text-transform: none !important; }
+        p#msg { font-size: 0.9rem; line-height: 1.4; margin-bottom: 20px; min-height: 3em; text-transform: none !important; }
         .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        
         .btn-ans { 
             background: white; color: #0a192f; border: 2px solid #d4af37;
             padding: 12px; border-radius: 12px; cursor: pointer; font-weight: bold; 
-            font-size: 0.9rem; text-transform: none; transition: all 0.2s ease; animation: goldPulse 2s infinite;
+            font-size: 0.9rem; text-transform: none; transition: all 0.2s ease;
         }
         .btn-ans:active { transform: scale(0.9); background: #d4af37 !important; color: white !important; }
+        
         #btnBack {
             display: none; background: rgba(212, 175, 55, 0.2); color: #d4af37; 
             border: 1px solid #d4af37; padding: 10px; margin-top: 10px; border-radius: 10px;
             font-size: 0.8rem; width: 100%; font-weight: bold; cursor: pointer;
         }
-        @keyframes goldPulse { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
     </style>
 </head>
 <body>
