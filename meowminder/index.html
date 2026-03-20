@@ -58,11 +58,11 @@
         <video id="vidDisplay" class="display-media" autoplay muted loop playsinline></video>
         
         <h1 id="judul">Eid Mubarak! ✨</h1>
-        <p id="msg">A special gift from Meowminder.<br>May your day be filled with joy!</p>
+        <p id="msg">A special gift from Meowminder.<br><b>Taqabbalallahu Minna wa Minkum</b><br><small>May Allah accept our good deeds</small></p>
         
         <div id="groupTombol" class="btn-group">
             <button class="btn-ans" onclick="jawab('wish')">Make a Wish</button>
-            <button class="btn-ans" onclick="jawab('treats')">Send Cat Treats 🐟</button>
+            <button class="btn-ans" onclick="jawab('treats')">Send Meow Treats 🐟</button>
             <button class="btn-ans" onclick="jawab('hug')">Virtual Hug</button>
         </div>
         <button id="btnBack" onclick="resetPage()">← Back to Start</button>
@@ -96,30 +96,30 @@
             btnBack.style.display = "block"; 
 
             if(tipe === 'wish') {
-                j.innerText = "Ameen! 🤲";
-                p.innerHTML = "May all your prayers be answered<br>and your heart be at peace.";
+                j.innerText = "Ameen Ya Rabb! 🤲";
+                p.innerHTML = "<b>May Allah accept your fasts and prayers.</b><br>May His light guide your path<br>and fill your heart with peace.";
                 confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
                 showMedia('img', 'amiin.jpeg');
             } 
             else if(tipe === 'treats') {
-                j.innerText = "Yummy! 🐟";
-                p.innerHTML = "The cats are very happy!<br>Thank you for the treats, hooman.";
+                j.innerText = "Barakallah! 🐟";
+                p.innerHTML = "<b>Jazakallahu Khairan!</b><br>Meow is very happy with the treats.<br><small>May your kindness be rewarded by Allah.</small>";
                 showMedia('vid', 'fish.mp4');
-            } 
+            }
             else if(tipe === 'hug') {
-                j.innerText = "Warm Hugs 🤗";
-                p.innerHTML = "Sending you lots of love<br>and fluffy purrs today!";
+                j.innerText = "Warm Eid Hugs 🤗";
+                p.innerHTML = "Sending you a warm hug and many prayers:<br><b>May your heart always be at peace with Allah's love.</b><br>";
                 showMedia('vid', 'virtualhug.mp4');
             }
         }
 
         function resetPage() {
-            j.innerText = "Eid Mubarak! ✨";
-            p.innerHTML = "A special gift from Meowminder.<br>May your day be filled with joy!";
-            showMedia('img', 'muslimcat.jpeg');
-            btnBack.style.display = "none";
-            groupTombol.style.display = "flex";
-        }
+    j.innerText = "Eid Mubarak! ✨";
+    p.innerHTML = "A special gift from Meowminder.<br><b>Taqabbalallahu Minna wa Minkum</b><br><small>May Allah accept our good deeds</small>";
+    showMedia('img', 'muslimcat.jpeg');
+    btnBack.style.display = "none";
+    groupTombol.style.display = "flex";
+}
     </script>
 </body>
 </html>
